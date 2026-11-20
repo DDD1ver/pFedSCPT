@@ -140,34 +140,6 @@ Real-image training combines label CE, private EMA teacher preservation, shared/
 
 Round indices start at zero. Full participation is the default. With **--sample** below one, round 0 still warms up every client; later metrics cover only clients selected in that round.
 
-## Key configuration
-
-| Argument | Default | Meaning |
-| --- | --- | --- |
-| --n-parties | 20 | Client count |
-| --comm-round | 200 | Total rounds, including warm-up |
-| --sample | 1.0 | Participation fraction after warm-up |
-| --batch-size | 100 | Local batch size |
-| --epochs | 5 | Round-0 CE warm-up epochs |
-| --e-distill | 7 | PRKI epochs per active round |
-| --lr | auto | 0.005 for SimpleCNN; 0.1 for ResNet-18 |
-| --rho | 0.9 | SGD momentum |
-| --local-qual-min-count | 7 | Source class count threshold |
-| --global-gamma | 0.1 | Class count weighting exponent |
-| --class-reliable-min | 12 | Count for full local reliability |
-| --global-min-support / --tau-B | 3 / 0.6 | Strong tier thresholds |
-| --medium-min-support / --medium-tau-B | 2 / 0.3 | Medium tier thresholds |
-| --medium-cema-max-weight | 0.5 | Medium transfer cap |
-| --eta-B | 0.82 | Server memory EMA decay |
-| --ema-decay | 0.97 | Private teacher EMA decay |
-| --lambda-rep-seen | 0.2 | Replay loss weight |
-| --lambda-align | 0.05 | Shared prototype alignment weight |
-| --lambda-pcon | 0.02 | Strong prototype contrastive weight |
-| --lambda-adapter-reg | 0.01 | Adapter identity regularization |
-| --use-cema-memory | 1 | Set to 0 for a no-memory ablation |
-
-The learning rate halves every 40 rounds. Multiword flags generally accept both hyphens and the original underscore spelling. Resolved model, device, and learning rate values are saved in the run configuration.
-
 ### Configuration provenance and reproduction scope
 
 This is a core release, not a complete reproduction package for all manuscript tables. Transfer coefficients follow the existing CIFAR-100 full-method launch script. The source count threshold is 7; the client count and 200-round budget follow the current manuscript. Dataset-specific tuned configurations, baseline runners, three-seed result aggregation, and plotting scripts are outside this release.
